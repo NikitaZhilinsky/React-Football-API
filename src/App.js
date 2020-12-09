@@ -1,10 +1,9 @@
 import React from 'react';
+import TeamsList from './components/TeamsList';
 
 const App = () => {
   return (
-    <div>
-      Nikita
-    </div>
+    <TeamsList />
   );
 }
 
