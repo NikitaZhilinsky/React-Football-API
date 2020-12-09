@@ -45,8 +45,11 @@ const TeamsList = () => {
       <div className="club__list">
         {teams.map((team) => {
           return (
-            <div key={team.id} onClick={() => getPlayersList(team.id)} className="club__list_name">
-              {team.name}
+            <div key={team.id} onClick={() => getPlayersList(team.id)} className="club__list_cell">
+              <img src={team.crestUrl} alt={team.name} className="club__list_icon"/>
+              <div className="club__list_name">
+                {team.name}
+              </div>
             </div>
           );
         })}

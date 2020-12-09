@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   padding: 10px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .clubs__button {
@@ -36,31 +37,53 @@
   flex-wrap: wrap;
 }
 
-.club__list_name {
-  width: 300px;
-  padding: 5px 0;
-  margin-right: 7px;
+.club__list_cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 290px;
+  padding: 10px 0 0;
+  margin-right: 20px;
   border-bottom: 2px solid #7d7d7d;
-  font-size: 20px;
 }
 
-.club__list_name:hover {
+.club__list_cell:hover {
+  border-bottom: 2px solid #028d45;
+}
+
+.club__list_cell:hover .club__list_name {
   cursor: pointer;
   color: #028d45;
-  border-bottom: 2px solid #028d45;
+}
+
+.club__list_icon {
+  width: 170px;
+  padding-bottom: 7px;
+}
+
+.club__list_icon:hover {
+    cursor: pointer;
+}
+
+.club__list_name {
+  padding: 5px 0;
+  font-size: 20px;
 }
 
 .players__list {
   margin-top: 20px;
+
 }
 
 .club__player {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  font-size: 18px;
 }
 
 .players__list_position {
   font-style: italic;
-  font-size: 13px;
+  font-size: 16px;
 }
