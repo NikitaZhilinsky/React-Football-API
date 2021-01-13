@@ -1,14 +1,36 @@
+body {
+  margin: 0;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 .clubs {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  position: relative;
+  padding-bottom: 10px;
   font-family: 'Open Sans', sans-serif;
 }
 
-.clubs__button {
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  z-index: +20;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 3px solid #7d7d7d;
+}
+
+.clubs__button,
+.account__button {
   width: 125px;
   height: 45px;
-  margin-bottom: 15px;
+  margin: 18px 15px;
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   background-color: #d4d5d8;
@@ -16,12 +38,19 @@
   border-bottom: 3px solid #7d7d7d;
 }
 
-.clubs__button:hover {
+.account__button {
+  width: 160px;
+}
+
+.clubs__button:hover,
+.account__button:hover {
   cursor: pointer;
   border: 3px solid #7d7d7d;
 }
 
-.clubs__button:focus {
+.clubs__button:focus,
+.account__button:focus,
+.favorites_icon {
   outline: 0;
 }
 
@@ -35,6 +64,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding-top: 85px;
 }
 
 .club__list_cell {
@@ -42,9 +72,10 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  position: relative;
   width: 290px;
   padding: 10px 0 0;
-  margin-right: 20px;
+  margin: 0 10px;
   border-bottom: 2px solid #7d7d7d;
 }
 
@@ -63,7 +94,7 @@
 }
 
 .club__list_icon:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .club__list_name {
@@ -71,15 +102,66 @@
   font-size: 20px;
 }
 
-.players__list {
-  margin-top: 20px;
+.favorites__icon_team,
+.favorites__icon_player,
+.active__favorites__icon_team,
+.active__favorites__icon_player {
+  position: absolute;
+  z-index: +10;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background-color: inherit;
+  background-image: url(../img/star-white.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
+.favorites__icon_player,
+.active__favorites__icon_player {
+  top: 3px;
+  left: 290px;
+}
+
+.favorites__icon_team:hover,
+.favorites__icon_player:hover {
+  cursor: pointer;
+  background-image: url(../img/star-green.svg);
+}
+
+.favorites__icon_team:active,
+.favorites__icon_player:active {
+  background-image: url(../img/star-yellow.svg);
+}
+
+.favorites__icon_team:focus,
+.favorites__icon_player:focus,
+.active__favorites__icon_team:focus,
+.active__favorites__icon_player:focus {
+  outline: none;
+}
+
+.active__favorites__icon_team,
+.active__favorites__icon_player {
+  background-image: url(../img/star-yellow.svg);
+}
+
+.active__favorites__icon_team:hover,
+.active__favorites__icon_player:hover {
+  cursor: pointer;
+}
+
+.players__list {
+  margin: 20px 10px 0;
 }
 
 .club__player {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  position: relative;
   font-size: 18px;
 }
 

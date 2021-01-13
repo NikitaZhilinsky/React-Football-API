@@ -1,0 +1,141 @@
+.account__wraper {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.favorites__wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 100px 15px 0;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+.favorites__teams {
+  width: 49%;
+  margin: 0 10px 10px 0;
+}
+
+.favorites__players {
+  width: 49%;
+  margin: 0 0 10px 10px;
+}
+
+.favorites__title {
+  font-size: 25px;
+  margin-bottom: 17px;
+}
+
+.favorites__teams_area,
+.favorites__players_area {
+  border: 3px solid #7d7d7d;
+  box-sizing: border-box;
+}
+
+.favorites__team_cell,
+.favorites__player_cell {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.favorites__team_cell:hover,
+.favorites__player_cell:hover {
+  border-bottom: 3px solid #028d45;
+  padding-bottom: 2px;
+}
+
+.favorites__team_cell:active,
+.favorites__player_cell:active {
+  border-bottom: 3px solid #7d7d7d;
+}
+
+.favorites__team_icon {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.favorites__team_name,
+.favorites__player_name {
+  font-size: 19px;
+}
+
+.trash_team,
+.trash_player {
+  position: absolute;
+  z-index: +10;
+  top: 18px;
+  right: 18px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background-color: inherit;
+  background-image: url(../img/trash-light-grey.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* .favorites__team_cell:hover .trash_team {
+  top: 15px;
+}
+
+.favorites__player_cell:hover .trash_player {
+  top: 2px;
+} */
+
+.trash_player {
+  top: 5px;
+  right: 5px;
+}
+
+.trash_team:hover, 
+.trash_player:hover {
+  cursor: pointer;
+  background-image: url(../img/trash-green.svg);
+}
+
+.trash_team:active, 
+.trash_player:active {
+  cursor: pointer;
+  background-image: url(../img/trash-dark-grey.svg);
+}
+
+.trash_team:focus,
+.trash_player:focus {
+  outline: none;
+}
+
+.teamDetailedData,
+.playerDetailedData {
+  width: 49%;
+  padding: 5px;
+  border: 3px solid #7d7d7d;
+  box-sizing: border-box;
+}
+
+.teamDetailedData {
+  margin-right: 10px;
+}
+
+.playerDetailedData {
+  margin-left: 10px;
+}
+
+.teamWebsite,
+.playerNationality {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #7d7d7d;
+}
+
+.link {
+  color: #000;
+}
+
+.link:hover {
+  color: #028d45;
+}
