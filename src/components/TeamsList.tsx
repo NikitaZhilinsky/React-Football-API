@@ -4,46 +4,40 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { 
   getAllTeams, 
-  getAllPlayers, 
   addToFavoriteTeams,
-  addToFavoritePlayers,
-  removeFromFavoriteTeams,
-  removeFromFavoritePlayers
-} from '../redux/actions/index'
-
+  removeFromFavoriteTeams
+} from '../redux/actions/teamsActions';
+import {
+    getAllPlayers,
+    addToFavoritePlayers,
+    removeFromFavoritePlayers
+} from '../redux/actions/playersActions';
+import { Team } from '../redux/reducers/teamsReducer';
+import { Player } from '../redux/reducers/playersReducer';
+import { RootState } from '../redux/reducers/rootReducer';
 
 const TeamsList = () => {
-  const teams = useSelector((state) => state.teamsReducer.allTeams);
-  // console.log(teams);
-  
-  const favTeamsIds = useSelector((state) => state.teamsReducer.favTeamsIds);
-  // console.log(favTeamsIds);
-  
-  const players = useSelector((state) => state.playersReducer.allPlayers);
-  // console.log(players);
-  
-  const visiblePlayers = useSelector((state) => state.playersReducer.visiblePlayers);
-  // console.log(visiblePlayers);
-  
-  const favPlayersIds = useSelector((state) => state.playersReducer.favPlayersIds);
-  // console.log(favPlayersIds);
-  
+  const teams = useSelector((state: RootState) => state.teamsReducer.allTeams);
+  const favTeamsIds = useSelector((state: RootState) => state.teamsReducer.favTeamsIds);
+  const visiblePlayers = useSelector((state: RootState) => state.playersReducer.visiblePlayers);
+  const favPlayersIds = useSelector((state: RootState) => state.playersReducer.favPlayersIds);
+
   const dispatch = useDispatch();
 
   const getTeamsList = () => dispatch(getAllTeams());
-  const getPlayersList = (id) => dispatch(getAllPlayers(id));
-  const handleClickAddTeam = (id) => dispatch(addToFavoriteTeams(id));
-  const handleClickRemoveTeam = (id) => dispatch(removeFromFavoriteTeams(id, favTeamsIds));
-  const handleClickAddPlayer = (id) => dispatch(addToFavoritePlayers(id));
-  const handleClickRemovePlayer = (id) => dispatch(removeFromFavoritePlayers(id, favPlayersIds));
+  const getPlayersList = (id: number) => dispatch(getAllPlayers(id));
+  const handleClickAddTeam = (id: number) => dispatch(addToFavoriteTeams(id));
+  const handleClickRemoveTeam = (id: number) => dispatch(removeFromFavoriteTeams(id, favTeamsIds));
+  const handleClickAddPlayer = (id: number) => dispatch(addToFavoritePlayers(id));
+  const handleClickRemovePlayer = (id: number) => dispatch(removeFromFavoritePlayers(id, favPlayersIds));
 
-  const favoriteTeamsControll = (id) => {
+  const favoriteTeamsControll = (id: number) => {
     favTeamsIds.includes(id) ? 
       handleClickRemoveTeam(id) : 
       handleClickAddTeam(id)
   };
 
-  const classTeamActiveControll = (id) => {
+  const classTeamActiveControll = (id: number) => {
     return (
       favTeamsIds.includes(id) ? 
         "active__favorites__icon_team" : 
@@ -51,13 +45,13 @@ const TeamsList = () => {
     )
   }
 
-  const favoritePlayersControll = (id) => {
+  const favoritePlayersControll = (id: number) => {
     favPlayersIds.includes(id) ? 
       handleClickRemovePlayer(id) : 
       handleClickAddPlayer(id)
   };
 
-  const classPlayerActiveControll = (id) => {
+  const classPlayerActiveControll = (id: number) => {
     return (
       favPlayersIds.includes(id) ?
         "active__favorites__icon_player" :
@@ -77,9 +71,8 @@ const TeamsList = () => {
           </button>
         </Link>
       </div>
-      {/* {errorTeams ? <div className="club__list_error">{errorTeams}</div> : null} */}
       {!!teams.length && <div className="club__list">
-        {teams.map((team) => (
+        {teams.map((team: Team) => (
           <div key={team.id} onClick={() => getPlayersList(team.id)} className="club__list_cell">
             <img src={team.crestUrl} alt={team.name} className="club__list_icon"/>
             <div className="club__list_name">
@@ -93,7 +86,7 @@ const TeamsList = () => {
         ))}
       </div>}
       {!!visiblePlayers.length && <div className="players__list">
-        {visiblePlayers.map((player) => (
+        {visiblePlayers.map((player: Player) => (
           <div key={player.id} className="club__player">
             <div className="players__list_name">
               {player.name}
@@ -108,7 +101,6 @@ const TeamsList = () => {
           </div>
         ))}
       </div>}
-      {/* {errorPlayers ? <div className="club__player">Players not found</div> : null} */}
     </div>
   )
 }
