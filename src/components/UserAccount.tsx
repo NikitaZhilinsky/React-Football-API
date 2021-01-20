@@ -57,23 +57,25 @@ const UserAccount = () => {
                     </button>
                   </div>
                   <div className="teamDetailedData">
-                  <div>
-                    Address: {selTeam.address}
+                    <div>
+                      Address: {selTeam.address}
+                    </div>
+                    <div>
+                      Founded: {selTeam.founded}
+                    </div>
+                    <div>
+                      Venue: {selTeam.venue}
+                    </div>
+                    <div className="teamWebsite">
+                      Website: <a 
+                                href={selTeam.website} 
+                                target="_blank"
+                                rel="noreferrer" 
+                                className="link">
+                                  {selTeam.website}
+                               </a> 
+                    </div>
                   </div>
-                  <div>
-                    Founded: {selTeam.founded}
-                  </div>
-                  <div>
-                    Venue: {selTeam.venue}
-                  </div>
-                  <div className="teamWebsite">
-                    Website: <a 
-                              href={selTeam.website} 
-                              target="_blank"
-                              rel="noreferrer" 
-                              className="link">{selTeam.website}</a> 
-                  </div>
-                </div>
                 </div>
               )              
             })}

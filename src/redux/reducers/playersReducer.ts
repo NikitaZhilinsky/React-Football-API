@@ -1,12 +1,14 @@
 import { 
   GET_ALL_PLAYERS,
   ADD_TO_FAVORITE_PLAYERS,
-  REMOVE_FROM_FAVORITE_PLAYERS 
+  REMOVE_FROM_FAVORITE_PLAYERS,
+  PLAYERS_REQUEST_ERROR 
 } from '../actions/consts';
 import {
   getAllPlayersType,
   addToFavoritePlayersType,
-  removeFromFavoritePlayersType
+  removeFromFavoritePlayersType,
+  playersRequesrErrorType
 } from '../actions/playersActions';
 
 export type Player = {
@@ -23,16 +25,21 @@ export type Player = {
 type initialStateType = {
   allPlayers: Player[],
   visiblePlayers: Player[],
-  favPlayersIds: number[]
+  favPlayersIds: number[],
+  error: string
 }
 
 const initialState: initialStateType = {
   allPlayers: [],
   visiblePlayers: [],
-  favPlayersIds: []
+  favPlayersIds: [],
+  error: ""
 }
 
-export type ActionsTypes = getAllPlayersType | addToFavoritePlayersType | removeFromFavoritePlayersType
+export type ActionsTypes = getAllPlayersType | 
+                           addToFavoritePlayersType | 
+                           removeFromFavoritePlayersType |
+                           playersRequesrErrorType
 
 const playersReducer = (state = initialState, action: ActionsTypes): initialStateType => {
   switch (action.type) {
@@ -41,7 +48,8 @@ const playersReducer = (state = initialState, action: ActionsTypes): initialStat
         ...state, 
         allPlayers: [...state.allPlayers, ...action.players], 
         visiblePlayers: action.loaded,
-        favPlayersIds: action.favPlayersIds
+        favPlayersIds: action.favPlayersIds,
+        error: ""
       }
     case ADD_TO_FAVORITE_PLAYERS:
       return {
@@ -52,6 +60,12 @@ const playersReducer = (state = initialState, action: ActionsTypes): initialStat
       return {
         ...state, 
         favPlayersIds: action.favPlayersIds
+      }
+    case PLAYERS_REQUEST_ERROR:
+      return {
+        ...state,
+        visiblePlayers: [],
+        error: action.error
       }
     default:
       return state;

@@ -1,12 +1,14 @@
 import { 
   GET_ALL_TEAMS,
   ADD_TO_FAVORITE_TEAMS,
-  REMOVE_FROM_FAVORITE_TEAMS
+  REMOVE_FROM_FAVORITE_TEAMS,
+  TEAMS_REQUEST_ERROR
 } from '../actions/consts';
 import {
   getAllTeamsType,
   addToFavoriteTeamsType,
-  removeFromFavoriteTeamsType
+  removeFromFavoriteTeamsType,
+  teamsRequesrErrorType
 } from '../actions/teamsActions';
 
 export type Team = {
@@ -31,15 +33,20 @@ export type Team = {
 
 type initialStateType = {
   allTeams: Team[],
-  favTeamsIds: number[]
+  favTeamsIds: number[],
+  error: string
 }
 
 const initialState: initialStateType = {
   allTeams: [],
-  favTeamsIds: []
+  favTeamsIds: [],
+  error: ""
 }
 
-export type ActionsTypes = getAllTeamsType | addToFavoriteTeamsType | removeFromFavoriteTeamsType
+export type ActionsTypes = getAllTeamsType | 
+                           addToFavoriteTeamsType | 
+                           removeFromFavoriteTeamsType | 
+                           teamsRequesrErrorType
 
 const teamsReducer = (state = initialState, action: ActionsTypes): initialStateType => {
   switch (action.type) {
@@ -47,7 +54,8 @@ const teamsReducer = (state = initialState, action: ActionsTypes): initialStateT
       return {
         ...state, 
         allTeams: action.teams, 
-        favTeamsIds: action.favTeamsIds
+        favTeamsIds: action.favTeamsIds,
+        error: ""
       }
     case ADD_TO_FAVORITE_TEAMS:
       return {
@@ -58,6 +66,12 @@ const teamsReducer = (state = initialState, action: ActionsTypes): initialStateT
       return {
         ...state, 
         favTeamsIds: action.favTeamsIds
+      }
+    case TEAMS_REQUEST_ERROR:
+      return {
+        ...state,
+        allTeams: [], 
+        error: action.error
       }
     default:
       return state;

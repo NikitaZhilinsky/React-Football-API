@@ -1,7 +1,8 @@
 import { 
   GET_ALL_PLAYERS, 
   ADD_TO_FAVORITE_PLAYERS,
-  REMOVE_FROM_FAVORITE_PLAYERS
+  REMOVE_FROM_FAVORITE_PLAYERS,
+  PLAYERS_REQUEST_ERROR
 } from './consts';
 import { ActionsTypes, Player } from '../reducers/playersReducer';
 import { Dispatch } from 'react';
@@ -38,6 +39,10 @@ export const getAllPlayers = (id: number) => async (dispatch: Dispatch<ActionsTy
     });
   } catch(err) {
     console.error(err);
+    return dispatch ({
+      type: PLAYERS_REQUEST_ERROR,
+      error: err.stack
+    })
   }
 }
 
@@ -46,6 +51,11 @@ export type getAllPlayersType = {
   players: Player[],
   loaded: Player[],
   favPlayersIds: number[]
+}
+
+export type playersRequesrErrorType = {
+  type: typeof PLAYERS_REQUEST_ERROR,
+  error: string
 }
 
 export const addToFavoritePlayers = (id: number) => (dispatch: Dispatch<ActionsTypes>, getState: () => RootState) => {

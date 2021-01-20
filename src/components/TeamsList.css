@@ -56,8 +56,8 @@ body::-webkit-scrollbar {
 
 .club__list_error {
   font-weight: bold;
-  font-size: 20px;
-  margin-bottom: 15px;
+  font-size: 22px;
+  margin: 94px 0 0 15px;
 }
 
 .club__list {
@@ -153,8 +153,21 @@ body::-webkit-scrollbar {
   cursor: pointer;
 }
 
+.players__list_error {
+  font-weight: bold;
+  font-size: 22px;
+  margin: 25px 0 0 15px;
+}
+
 .players__list {
   margin: 20px 10px 0;
+}
+
+.players__list_title {
+  font-size: 20px;
+  margin-bottom: 5px;
+  width: 315px;
+  border-bottom: 2px solid #7d7d7d;
 }
 
 .club__player {

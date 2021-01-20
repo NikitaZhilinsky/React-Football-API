@@ -1,7 +1,8 @@
 import { 
   GET_ALL_TEAMS, 
   ADD_TO_FAVORITE_TEAMS,
-  REMOVE_FROM_FAVORITE_TEAMS
+  REMOVE_FROM_FAVORITE_TEAMS,
+  TEAMS_REQUEST_ERROR
 } from './consts';
 import { ActionsTypes, Team } from '../reducers/teamsReducer';
 import { Dispatch } from 'react';
@@ -14,16 +15,22 @@ export const getAllTeams = () => async (dispatch: Dispatch<ActionsTypes>) => {
         "X-Auth-Token": "9053d3414524438e9f1753cf3f3732cb",
       },
     })
+    
     const data = await response.json();
     const favTeamsIds = JSON.parse(localStorage.getItem("favTeamsIds") || "[]") || [];
     localStorage.setItem("allTeams", JSON.stringify(data.teams));
+
     return dispatch({
       type: GET_ALL_TEAMS,
       teams: data.teams,
-      favTeamsIds,
+      favTeamsIds
     });
   } catch (err) {
     console.error(err);
+    return dispatch ({
+      type: TEAMS_REQUEST_ERROR,
+      error: err.stack
+    })
   }
 };
 
@@ -31,6 +38,11 @@ export type getAllTeamsType = {
   type: typeof GET_ALL_TEAMS,
   teams: Team[],
   favTeamsIds: number[]
+}
+
+export type teamsRequesrErrorType = {
+  type: typeof TEAMS_REQUEST_ERROR,
+  error: string
 }
 
 export const addToFavoriteTeams = (id: number) => (dispatch: Dispatch<ActionsTypes>, getState: () => RootState) => { 

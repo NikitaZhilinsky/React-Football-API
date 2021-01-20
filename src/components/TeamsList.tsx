@@ -8,9 +8,9 @@ import {
   removeFromFavoriteTeams
 } from '../redux/actions/teamsActions';
 import {
-    getAllPlayers,
-    addToFavoritePlayers,
-    removeFromFavoritePlayers
+  getAllPlayers,
+  addToFavoritePlayers,
+  removeFromFavoritePlayers
 } from '../redux/actions/playersActions';
 import { Team } from '../redux/reducers/teamsReducer';
 import { Player } from '../redux/reducers/playersReducer';
@@ -19,9 +19,12 @@ import { RootState } from '../redux/reducers/rootReducer';
 const TeamsList = () => {
   const teams = useSelector((state: RootState) => state.teamsReducer.allTeams);
   const favTeamsIds = useSelector((state: RootState) => state.teamsReducer.favTeamsIds);
+  const errorTeams = useSelector((state: RootState) => state.teamsReducer.error);
+  
   const visiblePlayers = useSelector((state: RootState) => state.playersReducer.visiblePlayers);
   const favPlayersIds = useSelector((state: RootState) => state.playersReducer.favPlayersIds);
-
+  const errorPlayers = useSelector((state: RootState) => state.playersReducer.error);
+  
   const dispatch = useDispatch();
 
   const getTeamsList = () => dispatch(getAllTeams());
@@ -71,11 +74,19 @@ const TeamsList = () => {
           </button>
         </Link>
       </div>
+      {!!errorTeams.length && <div className="club__list_error">
+        "{errorTeams}". Please try again later.
+      </div>}
       {!!teams.length && <div className="club__list">
         {teams.map((team: Team) => (
-          <div key={team.id} onClick={() => getPlayersList(team.id)} className="club__list_cell">
-            <img src={team.crestUrl} alt={team.name} className="club__list_icon"/>
-            <div className="club__list_name">
+          <div key={team.id} className="club__list_cell">
+            <img 
+              src={team.crestUrl} 
+              onClick={() => getPlayersList(team.id)} 
+              alt={team.name} 
+              className="club__list_icon"
+            />
+            <div onClick={() => getPlayersList(team.id)} className="club__list_name">
               {team.name}
             </div>
             <button 
@@ -85,7 +96,13 @@ const TeamsList = () => {
           </div>
         ))}
       </div>}
+      {!!errorPlayers.length && <div className="players__list_error">
+        "{errorPlayers}". Please try again later.
+      </div>}
       {!!visiblePlayers.length && <div className="players__list">
+        <div className="players__list_title">
+          Players:
+        </div>
         {visiblePlayers.map((player: Player) => (
           <div key={player.id} className="club__player">
             <div className="players__list_name">
